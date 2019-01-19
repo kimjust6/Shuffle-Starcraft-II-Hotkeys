@@ -8,10 +8,10 @@ def main():
     #declaractions
     base_file_directory = ""
     account_number = ""
-
-
+    windows_username = os.getlogin()
+    print(windows_username)
     #prompt user for directory that we will be using
-    base_file_directory = raw_input("Please enter the file directory for your starcraft folder:\nLeaving this empty will assume it is in the default location.\n")
+    base_file_directory = input("Please enter the file directory for your starcraft folder:\nLeaving this empty will assume it is in the default location.\n")
 
     #check for valid user input
     #if it is empty, assume the default directory
@@ -22,7 +22,7 @@ def main():
         print(base_file_directory)
 
     #prompt user for the accountId
-    account_number = raw_input("\nPlease enter the accountId that you want to copy from.\nLeaving this empty will assume that the default is 56959549.")
+    account_number = input("\nPlease enter the accountId that you want to copy from.\nLeaving this empty will assume that the default is 56959549.")
     if account_number == "":
         print("boy that is an empty string!\nAssuming 56959549:")
         account_number = "56959549"
@@ -34,18 +34,23 @@ def main():
     for x in accounts:
         #check if account is the source account of the shuffle (56959549) and skip if that is the case
         if x != account_number:
-            makeShuffle( base_file_directory, account_number )
+            makeShuffle( base_file_directory, account_number, x )
             full_file_directory = base_file_directory + account_number + "\\Hotkeys\\MLT.SC2Hotkeys"
-            shutil.move( full_file_directory+ ".temp", base_file_directory + x + "\Hotkeys\MLT.SC2Hotkeys")
+            #shutil.move(os.path.join(src, filename), os.path.join(dst, filename))
+            #copy and then remove because moving doesn't allow overwriting
+            #shutil.copy( full_file_directory + "temp", base_file_directory + x + "\\Hotkeys\\MLT.SC2Hotkeys")
+            #remove now
 
 
-def makeShuffle(base_file_directory, account_number):
+
+def makeShuffle(base_file_directory, account_number, copy_account_number):
     #importing libraries needed for makeShuffle function
     import time
     import sys
     import random
     #path to original file
     full_file_directory = base_file_directory + account_number + "\\Hotkeys\\MLT.SC2Hotkeys"
+    full_copy_file_directory = base_file_directory + copy_account_number + "\\Hotkeys\\MLT.SC2Hotkeys"
     inputfile = open(full_file_directory,"r")
 
 
@@ -182,7 +187,7 @@ def makeShuffle(base_file_directory, account_number):
             #print( "\n" + key1[x][y] + "=" + key2[x][y] )
 
     #put hotkeys back untouched (hotkeys that don't need to be shuffled)
-    outputfile = open(full_file_directory + ".temp", "w")
+    outputfile = open(full_copy_file_directory, "w")
     outputfile.write( otherString )
 
     for x in range ( 0, 5 ):
