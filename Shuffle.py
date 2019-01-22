@@ -1,21 +1,66 @@
 
 def main():
+
+
+    #importing libraries needed for main
     import shutil
     import os
+    #declaractions
+    base_file_directory = ""
+    account_number = ""
+    windows_username = os.getlogin()
+    print(windows_username)
+    #prompt user for directory that we will be using
+    base_file_directory = input("Please enter the file directory for your starcraft folder:\nLeaving this empty will assume it is in the default location.\n")
+
+    #check for valid user input
+    #if it is empty, assume the default directory
+    if base_file_directory == "":
+        print("boy that is an empty string!\nAssuming default location:")
+        #base_file_directory = "D:\Documents\Starcraft II\accounts\\"
+        base_file_directory = "Z:\\My Drive\\Dropbox\\New folder (3)\\Starcraft II\\Accounts\\"
+        print(base_file_directory)
+
+    #prompt user for the accountId
+    account_number = input("\nPlease enter the accountId that you want to copy from.\nLeaving this empty will assume that the default is 56959549.")
+    if account_number == "":
+        print("boy that is an empty string!\nAssuming 56959549:")
+        account_number = "56959549"
+
+
     #the accountIds of the accounts you want to copy and shuffle hotkeys to
     #this should be changed so that it copies them automatically
+<<<<<<< HEAD
     accounts = ["1736517", "70056340", "72705267", "77732427", "85434961", "86373425", "86492430", "87808971", "89446409", "89662727", "126384011", "315855594", "350403565", "351690861", "377437837", "377785739", "377793407", "379201447", "379209204", "379220901", "379220943", "379252463", "379252496", "379266120", "379906113", "381274912", "381827850", "381857282", "381867033", "448356624"]
     for x in accounts:
         makeShuffle()
         shutil.move( "C:\\Users\\MLT-Acer\\Downloads\\MLT-Shuffle.SC2Hotkeys", "Z:\\My Drive\\Dropbox\\New folder (3)\\Starcraft II\\Accounts\\" + x + "\Hotkeys\MLT.SC2Hotkeys")
+=======
+    #accounts = ["1736517", "70056340", "72705267", "77732427", "85434961", "86373425", "86492430", "87808971", "89446409", "89662727", "126384011", "315855594", "350403565", "351690861", "377437837", "377785739", "377793407", "379201447", "379209204", "379220901", "379220943", "379252463", "379252496", "379266120", "379906113", "381274912", "381827850", "381857282", "381867033", "448356624"]
+    #for x in accounts:
+
+    for x in os.listdir(base_file_directory):
+        #check if account is the source account of the shuffle (56959549) and skip if that is the case
+        if x != account_number:
+            makeShuffle( base_file_directory, account_number, x )
+            full_file_directory = base_file_directory + account_number + "\\Hotkeys\\MLT.SC2Hotkeys"
+            #shutil.move(os.path.join(src, filename), os.path.join(dst, filename))
+            #copy and then remove because moving doesn't allow overwriting
+            #shutil.copy( full_file_directory + "temp", base_file_directory + x + "\\Hotkeys\\MLT.SC2Hotkeys")
+            #remove now
+>>>>>>> 2019-01-18-v1
 
 
-def makeShuffle():
+
+def makeShuffle(base_file_directory, account_number, copy_account_number):
+    #importing libraries needed for makeShuffle function
     import time
     import sys
     import random
     #path to original file
-    inputfile = open("Z:\\My Drive\\Dropbox\\New folder (3)\\Starcraft II\\accounts\\56959549\\Hotkeys\\MLT.SC2Hotkeys","r")
+    full_file_directory = base_file_directory + account_number + "\\Hotkeys\\MLT.SC2Hotkeys"
+    full_copy_file_directory = base_file_directory + copy_account_number + "\\Hotkeys\\MLT.SC2Hotkeys"
+    inputfile = open(full_file_directory,"r")
 
 
     keywords = ["ControlGroupAppendAndSteal", "ControlGroupAppend", "ControlGroupAssignAndSteal", "ControlGroupAssign", "ControlGroupRecall", "CameraSave", "CameraView"]
@@ -56,16 +101,10 @@ def makeShuffle():
         key1[6][y] = keywords[6] + str(y)
         key2[6][y] = "Shift+F" + str(y+1)
 
-
-
-    #test print
-    #for x in range ( 0, 7 ):
-    #    for y in range ( 0, 10 ):
-    #        print(key1[x][y]+"="+key2[x][y])
-
     #parse all the text
     for line in lines:
         line = line.strip()
+        #top of the line says CommandHotkeyes, we want to skip that line
         if passedCommandHotkeys == True:
             commandHotkeys = commandHotkeys + "\n" + line
         elif "ControlGroupAppendAndSteal" in line:
@@ -157,7 +196,11 @@ def makeShuffle():
             #print( "\n" + key1[x][y] + "=" + key2[x][y] )
 
     #put hotkeys back untouched (hotkeys that don't need to be shuffled)
+<<<<<<< HEAD
     outputfile = open("C:\\Users\\MLT-Acer\\Downloads\\MLT-Shuffle.SC2Hotkeys", "w")
+=======
+    outputfile = open(full_copy_file_directory, "w")
+>>>>>>> 2019-01-18-v1
     outputfile.write( otherString )
 
     for x in range ( 0, 5 ):
