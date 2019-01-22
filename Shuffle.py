@@ -30,12 +30,6 @@ def main():
 
     #the accountIds of the accounts you want to copy and shuffle hotkeys to
     #this should be changed so that it copies them automatically
-<<<<<<< HEAD
-    accounts = ["1736517", "70056340", "72705267", "77732427", "85434961", "86373425", "86492430", "87808971", "89446409", "89662727", "126384011", "315855594", "350403565", "351690861", "377437837", "377785739", "377793407", "379201447", "379209204", "379220901", "379220943", "379252463", "379252496", "379266120", "379906113", "381274912", "381827850", "381857282", "381867033", "448356624"]
-    for x in accounts:
-        makeShuffle()
-        shutil.move( "C:\\Users\\MLT-Acer\\Downloads\\MLT-Shuffle.SC2Hotkeys", "Z:\\My Drive\\Dropbox\\New folder (3)\\Starcraft II\\Accounts\\" + x + "\Hotkeys\MLT.SC2Hotkeys")
-=======
     #accounts = ["1736517", "70056340", "72705267", "77732427", "85434961", "86373425", "86492430", "87808971", "89446409", "89662727", "126384011", "315855594", "350403565", "351690861", "377437837", "377785739", "377793407", "379201447", "379209204", "379220901", "379220943", "379252463", "379252496", "379266120", "379906113", "381274912", "381827850", "381857282", "381867033", "448356624"]
     #for x in accounts:
 
@@ -48,7 +42,6 @@ def main():
             #copy and then remove because moving doesn't allow overwriting
             #shutil.copy( full_file_directory + "temp", base_file_directory + x + "\\Hotkeys\\MLT.SC2Hotkeys")
             #remove now
->>>>>>> 2019-01-18-v1
 
 
 
@@ -196,11 +189,8 @@ def makeShuffle(base_file_directory, account_number, copy_account_number):
             #print( "\n" + key1[x][y] + "=" + key2[x][y] )
 
     #put hotkeys back untouched (hotkeys that don't need to be shuffled)
-<<<<<<< HEAD
-    outputfile = open("C:\\Users\\MLT-Acer\\Downloads\\MLT-Shuffle.SC2Hotkeys", "w")
-=======
+
     outputfile = open(full_copy_file_directory, "w")
->>>>>>> 2019-01-18-v1
     outputfile.write( otherString )
 
     for x in range ( 0, 5 ):
