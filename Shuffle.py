@@ -18,7 +18,7 @@ def main():
     if base_file_directory == "":
         print("boy that is an empty string!\nAssuming default location:")
         #base_file_directory = "D:\Documents\Starcraft II\accounts\\"
-        base_file_directory = "Z:\\My Drive\\Dropbox\\New folder (3)\\Starcraft II\\Accounts\\"
+        base_file_directory = "Z:\\My Drive\\Docs\\StarCraft II\\Accounts\\"
         print(base_file_directory)
 
     #prompt user for the accountId
@@ -51,6 +51,7 @@ def makeShuffle(base_file_directory, account_number, copy_account_number):
     import sys
     import random
     #path to original file
+    print("Shuffling: ", copy_account_number)
     full_file_directory = base_file_directory + account_number + "\\Hotkeys\\MLT.SC2Hotkeys"
     full_copy_file_directory = base_file_directory + copy_account_number + "\\Hotkeys\\MLT.SC2Hotkeys"
     inputfile = open(full_file_directory,"r")
